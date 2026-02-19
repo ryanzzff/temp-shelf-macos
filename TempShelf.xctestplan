@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "BFBA650C-7B11-4FE3-BA07-5687CA15E7F3",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:TempShelf.xcodeproj",
+      "identifier" : "A60000000000000000000000",
+      "name" : "TempShelf"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:TempShelf.xcodeproj",
+        "identifier" : "B60000000000000000000000",
+        "name" : "TempShelfTests"
+      }
+    }
+  ],
+  "version" : 1
+}
