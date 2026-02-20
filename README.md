@@ -47,6 +47,7 @@ TempShelf/
 ## Docs
 
 - [Feature Plan & Research](docs/PLAN.md) - competitive landscape, feature roadmap (Phase 1-3), tech stack analysis, and architecture decisions
+- [Changelog](CHANGELOG.md) - notable changes and design decisions
 
 ## License
 

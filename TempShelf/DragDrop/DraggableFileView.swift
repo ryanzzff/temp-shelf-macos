@@ -18,7 +18,7 @@ class DraggableFileNSView: NSView, NSDraggingSource {
     ) -> NSDragOperation {
         switch context {
         case .outsideApplication:
-            return [.copy, .move]
+            return .copy
         case .withinApplication:
             return .move
         @unknown default:
@@ -32,10 +32,18 @@ class DraggableFileNSView: NSView, NSDraggingSource {
         operation: NSDragOperation
     ) {
         dragSessionStarted = false
-        // Notify that drag completed so items can be removed from shelf
-        if operation != [] {
-            onDragCompleted?(operation)
+        guard operation != [] else { return }
+
+        // Ignore drops back onto our own app (e.g. accidental drop on shelf)
+        guard !ShelfDragSource.isInsideApp(screenPoint: screenPoint) else { return }
+
+        if NSEvent.modifierFlags.contains(.option) {
+            let urlsToTrash = fileURLs
+            DispatchQueue.main.asyncAfter(deadline: .now() + ShelfDragSource.sourceDeletionDelay) {
+                ShelfDragSource.verifyAndTrashSourceFiles(urlsToTrash)
+            }
         }
+        onDragCompleted?(operation)
     }
 
     override func mouseDown(with event: NSEvent) {
