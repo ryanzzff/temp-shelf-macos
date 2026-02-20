@@ -80,6 +80,8 @@ class ShelfDropView: NSVisualEffectView {
     }
 
     override func draggingEntered(_ sender: any NSDraggingInfo) -> NSDragOperation {
+        // Reject drops from within our own app (prevents shelf items being removed and re-added)
+        if sender.draggingSource != nil { return [] }
         isDragOver = true
         needsDisplay = true
         return dropHandler?.draggingEntered(sender) ?? .copy
@@ -91,6 +93,7 @@ class ShelfDropView: NSVisualEffectView {
     }
 
     override func draggingUpdated(_ sender: any NSDraggingInfo) -> NSDragOperation {
+        if sender.draggingSource != nil { return [] }
         return .copy
     }
 
