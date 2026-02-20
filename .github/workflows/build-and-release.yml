@@ -56,6 +56,9 @@ jobs:
         run: |
           cp -R build/TempShelf.xcarchive/Products/Applications/TempShelf.app build/TempShelf.app
 
+      - name: Ad-hoc sign
+        run: codesign --force --deep --sign - build/TempShelf.app
+
       - name: Create zip
         run: |
           cd build
